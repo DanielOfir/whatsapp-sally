@@ -1,6 +1,6 @@
 services:
   whatsapp-bridge:
-    image: yourusername/whatsapp-bridge:latest
+    image: danielofir/whatsapp-bridge:latest
     container_name: whatsapp-bridge
     restart: unless-stopped
     environment:
