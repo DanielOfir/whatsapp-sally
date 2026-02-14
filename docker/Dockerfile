@@ -3,7 +3,7 @@ FROM node:20-slim AS builder
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+RUN --mount=type=cache,target=/root/.npm npm ci
 
 COPY tsconfig.json ./
 COPY src ./src
@@ -48,21 +48,15 @@ ENV PUPPETEER_SKIP_DOWNLOAD=true
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci --omit=dev && npm cache clean --force
+RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev
 
 COPY --from=builder /app/dist ./dist
 
-# Run as non-root - create user with explicit UID to match common volume ownership
-RUN groupadd -r -g 997 botuser && useradd -r -u 997 -g botuser botuser
-
-# Create data directories with proper ownership
-RUN mkdir -p /app/data/whatsapp-session /app/data/logs \
-    && chown -R botuser:botuser /app
-
-# Ensure /tmp and subdirs are writable by botuser
-RUN mkdir -p /tmp/chrome /tmp/.X11-unix \
+# Create non-root user, data directories, and fix permissions
+RUN groupadd -r -g 997 botuser && useradd -r -u 997 -g botuser botuser \
+    && mkdir -p /app/data/whatsapp-session /app/data/logs /tmp/chrome /tmp/.X11-unix \
     && chmod 1777 /tmp \
-    && chown -R botuser:botuser /tmp/chrome /tmp/.X11-unix
+    && chown -R botuser:botuser /app /tmp/chrome /tmp/.X11-unix
 
 USER botuser
 
