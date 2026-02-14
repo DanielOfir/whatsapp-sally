@@ -1,12 +1,13 @@
 services:
   whatsapp-bridge:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
+    image: yourusername/whatsapp-bridge:latest
     container_name: whatsapp-bridge
     restart: unless-stopped
-    env_file:
-      - ../.env
+    environment:
+      - BOT_PHONE_NUMBER=972559733562@c.us
+      - WEBHOOK_PORT=3000
+      # - WEBHOOK_SECRET=your-secret-here
+      # - LOG_LEVEL=info
     ports:
       - "3002:3000"
     volumes:
