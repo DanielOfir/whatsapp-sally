@@ -1,4 +1,6 @@
 .env
+.env.local
+docker/.env
 node_modules/
 dist/
 data/
@@ -6,3 +8,4 @@ data/
 .DS_Store
 .vscode/
 .idea/
+*.env

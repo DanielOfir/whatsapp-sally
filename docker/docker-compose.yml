@@ -2,19 +2,41 @@
 # For local development, use: docker compose -f docker/docker-compose.dev.yml up --build
 # Or simply: make run
 #
-# Copy .env.example to .env and fill in required values before starting.
+# PORTAINER DEPLOYMENT:
+# - Use stack.env to define environment variables in Portainer's UI
+# - Or copy stack.env values to Portainer's "Environment variables" section
+#
+# LOCAL DEPLOYMENT:
+# - Copy .env.example to .env and fill in required values before starting
 
 services:
   whatsapp-bridge:
     image: danielofir/whatsapp-bridge:latest
     container_name: whatsapp-bridge
     restart: unless-stopped
-    env_file:
-      - ../.env
+    # For Portainer: Define all environment variables in Portainer's stack editor
+    # For local: Uncomment env_file below and use ../.env (copy from .env.example)
+    # env_file:
+    #   - ../.env
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     environment:
+      # === Required - Must be set in Portainer ===
+      - BOT_PHONE_NUMBER=${BOT_PHONE_NUMBER}
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+
+      # === Optional - Defaults provided ===
       - WEBHOOK_PORT=3000
+      - WHATSAPP_SESSION_PATH=./data/whatsapp-session
+      - REPLY_TIMEOUT_MS=30000
+      - REPLY_BUFFER_MS=1500
+      - CMD_TEMPLATE_ADD=הוסף {item}
+      - CMD_TEMPLATE_REMOVE=הסר {item}
+      - CMD_TEMPLATE_BOUGHT=קניתי {item}
+      - CMD_TEMPLATE_LIST=רשימה
+      - CMD_TEMPLATE_CLEAR=נקה
+      - LOG_LEVEL=info
+      - LOG_FILE=./data/logs/bridge.log
     ports:
       - "3002:3000"
     read_only: true
