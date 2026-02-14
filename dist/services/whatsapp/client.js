@@ -52,8 +52,23 @@ class WhatsAppClient {
                 dataPath: env_1.config.whatsapp.sessionPath,
             }),
             puppeteer: {
-                args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                    '--disable-dev-shm-usage',
+                    '--disable-crash-reporter',
+                    '--disable-breakpad',
+                    '--no-crash-upload',
+                    '--crash-dumps-dir=/tmp/chrome',
+                    '--disable-gpu',
+                    '--disable-software-rasterizer',
+                    '--disable-extensions',
+                    '--disable-background-networking',
+                    '--disable-default-apps',
+                    '--disable-sync',
+                ],
                 headless: true,
+                // Don't set executablePath - let Puppeteer use its bundled Chrome
             },
         });
         this.setupEventHandlers();

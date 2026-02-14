@@ -24,7 +24,11 @@ async function shutdown() {
 process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 main().catch((error) => {
-    logger_1.logger.error('Fatal error during startup', { error });
+    logger_1.logger.error('Fatal error during startup', {
+        message: error?.message,
+        stack: error?.stack,
+        error: error,
+    });
     process.exit(1);
 });
 //# sourceMappingURL=index.js.map

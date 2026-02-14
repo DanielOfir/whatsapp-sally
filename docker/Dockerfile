@@ -12,7 +12,7 @@ RUN npm run build
 # ------- Production image -------
 FROM node:20-slim
 
-# Chromium dependencies for whatsapp-web.js (Puppeteer)
+# Install Chromium and dependencies
 RUN apt-get update && apt-get install -y \
     chromium \
     ca-certificates \
@@ -35,7 +35,13 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-# Tell Puppeteer to use the installed Chromium
+# Create a wrapper for chrome_crashpad_handler that ignores the --database requirement
+# This fixes the crashpad_handler error without disabling crash reporting entirely
+RUN mv /usr/lib/chromium/chrome_crashpad_handler /usr/lib/chromium/chrome_crashpad_handler.real \
+    && printf '#!/bin/sh\nexec /usr/lib/chromium/chrome_crashpad_handler.real --database=/tmp "$@"\n' > /usr/lib/chromium/chrome_crashpad_handler \
+    && chmod +x /usr/lib/chromium/chrome_crashpad_handler
+
+# Tell Puppeteer to use system Chromium
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 
@@ -46,12 +52,13 @@ RUN npm ci --omit=dev && npm cache clean --force
 
 COPY --from=builder /app/dist ./dist
 
-# Create data directories
-RUN mkdir -p /app/data/whatsapp-session /app/data/logs
+# Create data directories and ensure /tmp is writable
+RUN mkdir -p /app/data/whatsapp-session /app/data/logs /tmp/chrome \
+    && chmod 1777 /tmp /tmp/chrome
 
 # Run as non-root
 RUN groupadd -r botuser && useradd -r -g botuser botuser \
-    && chown -R botuser:botuser /app
+    && chown -R botuser:botuser /app /tmp/chrome
 USER botuser
 
 EXPOSE 3000

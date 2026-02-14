@@ -30,6 +30,10 @@ process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 
 main().catch((error) => {
-  logger.error('Fatal error during startup', { error });
+  logger.error('Fatal error during startup', {
+    message: error?.message,
+    stack: error?.stack,
+    error: error,
+  });
   process.exit(1);
 });
