@@ -35,12 +35,6 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-# Create a wrapper for chrome_crashpad_handler that ignores the --database requirement
-# This fixes the crashpad_handler error without disabling crash reporting entirely
-RUN mv /usr/lib/chromium/chrome_crashpad_handler /usr/lib/chromium/chrome_crashpad_handler.real \
-    && printf '#!/bin/sh\nexec /usr/lib/chromium/chrome_crashpad_handler.real --database=/tmp "$@"\n' > /usr/lib/chromium/chrome_crashpad_handler \
-    && chmod +x /usr/lib/chromium/chrome_crashpad_handler
-
 # Tell Puppeteer to use system Chromium
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 ENV PUPPETEER_SKIP_DOWNLOAD=true
@@ -53,12 +47,24 @@ RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev
 COPY --from=builder /app/dist ./dist
 
 # Create non-root user, data directories, and fix permissions
+# Create all potential temp directories that Chromium might need
 RUN groupadd -r -g 997 botuser && useradd -r -u 997 -g botuser botuser \
-    && mkdir -p /app/data/whatsapp-session /app/data/logs /tmp/chrome /tmp/.X11-unix \
-    && chmod 1777 /tmp \
-    && chown -R botuser:botuser /app /tmp/chrome /tmp/.X11-unix
+    && mkdir -p \
+        /app/data/whatsapp-session \
+        /app/data/logs \
+        /home/botuser \
+        /home/botuser/.config \
+        /home/botuser/.cache/chromium \
+        /home/botuser/tmp \
+    && chown -R botuser:botuser /app /home/botuser
 
 USER botuser
+
+# Set environment variables for Chromium to use user directories
+ENV HOME=/home/botuser
+ENV XDG_CONFIG_HOME=/home/botuser/.config
+ENV XDG_CACHE_HOME=/home/botuser/.cache
+ENV TMPDIR=/home/botuser/tmp
 
 EXPOSE 3000
 

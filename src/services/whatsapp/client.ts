@@ -31,9 +31,7 @@ export class WhatsAppClient {
           '--disable-setuid-sandbox',
           '--disable-dev-shm-usage',
           '--disable-crash-reporter',
-          '--disable-breakpad',
           '--no-crash-upload',
-          '--crash-dumps-dir=/tmp',
           '--disable-gpu',
           '--disable-software-rasterizer',
           '--disable-extensions',
@@ -41,6 +39,10 @@ export class WhatsAppClient {
           '--disable-default-apps',
           '--disable-sync',
           '--disable-features=VizDisplayCompositor',
+          '--no-first-run',
+          '--no-default-browser-check',
+          '--single-process',
+          '--disable-features=IsolateOrigins,site-per-process',
         ],
         headless: true,
         executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
@@ -109,15 +111,39 @@ export class WhatsAppClient {
 
   private cleanStaleLocks(): void {
     const sessionDir = path.join(config.whatsapp.sessionPath, 'session');
-    for (const lockFile of ['SingletonLock', 'SingletonSocket', 'SingletonCookie']) {
+
+    // Ensure session directory exists
+    try {
+      if (!fs.existsSync(config.whatsapp.sessionPath)) {
+        fs.mkdirSync(config.whatsapp.sessionPath, { recursive: true });
+        logger.info('Created whatsapp session directory');
+      }
+      if (!fs.existsSync(sessionDir)) {
+        fs.mkdirSync(sessionDir, { recursive: true });
+        logger.info('Created session subdirectory');
+      }
+    } catch (error) {
+      logger.warn('Could not create session directories', { error });
+    }
+
+    // Clean all common Chromium lock files
+    const lockFiles = [
+      'SingletonLock',
+      'SingletonSocket',
+      'SingletonCookie',
+      'lockfile',
+      '.lock',
+    ];
+
+    for (const lockFile of lockFiles) {
       const lockPath = path.join(sessionDir, lockFile);
       try {
         if (fs.existsSync(lockPath)) {
           fs.unlinkSync(lockPath);
           logger.info(`Removed stale lock file: ${lockFile}`);
         }
-      } catch {
-        // Ignore — file may not exist or may already be cleaned
+      } catch (error) {
+        logger.warn(`Could not remove lock file ${lockFile}`, { error });
       }
     }
   }
