@@ -33,16 +33,17 @@ export class WhatsAppClient {
           '--disable-crash-reporter',
           '--disable-breakpad',
           '--no-crash-upload',
-          '--crash-dumps-dir=/tmp/chrome',
+          '--crash-dumps-dir=/tmp',
           '--disable-gpu',
           '--disable-software-rasterizer',
           '--disable-extensions',
           '--disable-background-networking',
           '--disable-default-apps',
           '--disable-sync',
+          '--disable-features=VizDisplayCompositor',
         ],
         headless: true,
-        // Don't set executablePath - let Puppeteer use its bundled Chrome
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
       },
     });
 

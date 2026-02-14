@@ -52,13 +52,18 @@ RUN npm ci --omit=dev && npm cache clean --force
 
 COPY --from=builder /app/dist ./dist
 
-# Create data directories and ensure /tmp is writable
-RUN mkdir -p /app/data/whatsapp-session /app/data/logs /tmp/chrome \
-    && chmod 1777 /tmp /tmp/chrome
+# Run as non-root - create user with explicit UID to match common volume ownership
+RUN groupadd -r -g 997 botuser && useradd -r -u 997 -g botuser botuser
 
-# Run as non-root
-RUN groupadd -r botuser && useradd -r -g botuser botuser \
-    && chown -R botuser:botuser /app /tmp/chrome
+# Create data directories with proper ownership
+RUN mkdir -p /app/data/whatsapp-session /app/data/logs \
+    && chown -R botuser:botuser /app
+
+# Ensure /tmp and subdirs are writable by botuser
+RUN mkdir -p /tmp/chrome /tmp/.X11-unix \
+    && chmod 1777 /tmp \
+    && chown -R botuser:botuser /tmp/chrome /tmp/.X11-unix
+
 USER botuser
 
 EXPOSE 3000

@@ -103,6 +103,28 @@ See `home-assistant/automations/grocery_bridge.yaml` for full configuration.
 - Port 3002 externally (avoids conflict with other apps)
 - Health check every 30s
 
+## Testing Workflow
+
+**IMPORTANT:** When testing code changes, ALWAYS use the Makefile commands:
+
+1. **Start testing**: `make run` (builds & starts container in dev mode)
+2. **Run your tests**: Use `make health`, `make test-webhook`, `make logs` as needed
+3. **Stop & cleanup**: `make stop` (REQUIRED after every testing session)
+
+**Clean up rule:** After completing any testing or development work, you MUST run `make stop` to stop containers and clean the environment. For deeper cleanup (remove volumes & images), use `make clean`.
+
+### Available Make Commands
+
+| Command | What it does | When to use |
+|---|---|---|
+| `make run` | Build & start container in dev mode | Start testing session |
+| `make stop` | Stop container | **ALWAYS run after testing** |
+| `make health` | Check health endpoint | Verify service is running |
+| `make logs` | Tail container logs | Debug issues |
+| `make test-webhook ACTION=add ITEM=חלב` | Send test webhook | Test webhook integration |
+| `make clean` | Remove containers, volumes & images | Deep cleanup (optional) |
+| `make build` | Build Docker image only | CI/CD or manual builds |
+
 ## Claude Commands
 
 Slash commands for running, debugging, and troubleshooting:
