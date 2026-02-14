@@ -7,6 +7,8 @@ services:
     image: danielofir/whatsapp-bridge:latest
     container_name: whatsapp-bridge
     restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - BOT_PHONE_NUMBER=972559733562@c.us
       - WEBHOOK_PORT=3000
@@ -23,6 +25,17 @@ services:
       timeout: 10s
       retries: 3
       start_period: 60s
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower-whatsapp-bridge
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_POLL_INTERVAL=300
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   whatsapp-session:
