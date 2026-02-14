@@ -45,6 +45,7 @@ COPY package*.json ./
 RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev
 
 COPY --from=builder /app/dist ./dist
+COPY docker/entrypoint.sh /app/entrypoint.sh
 
 # Create non-root user, data directories, and fix permissions
 # Create all potential temp directories that Chromium might need
@@ -56,6 +57,7 @@ RUN groupadd -r -g 997 botuser && useradd -r -u 997 -g botuser botuser \
         /home/botuser/.config \
         /home/botuser/.cache/chromium \
         /home/botuser/tmp \
+    && chmod +x /app/entrypoint.sh \
     && chown -R botuser:botuser /app /home/botuser
 
 USER botuser
@@ -71,4 +73,4 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3000/health', r => { let d=''; r.on('data',c=>d+=c); r.on('end',()=>{ process.exit(JSON.parse(d).status==='ok'?0:1) }) })"
 
-CMD ["node", "dist/index.js"]
+ENTRYPOINT ["/app/entrypoint.sh"]

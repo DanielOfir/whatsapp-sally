@@ -135,16 +135,30 @@ export class WhatsAppClient {
       '.lock',
     ];
 
+    let removedCount = 0;
     for (const lockFile of lockFiles) {
       const lockPath = path.join(sessionDir, lockFile);
       try {
         if (fs.existsSync(lockPath)) {
+          // Try to force remove with different permissions
+          try {
+            fs.chmodSync(lockPath, 0o666);
+          } catch {
+            // Ignore chmod errors
+          }
           fs.unlinkSync(lockPath);
           logger.info(`Removed stale lock file: ${lockFile}`);
+          removedCount++;
         }
       } catch (error) {
-        logger.warn(`Could not remove lock file ${lockFile}`, { error });
+        logger.error(`Failed to remove lock file ${lockFile}`, { error });
       }
+    }
+
+    if (removedCount > 0) {
+      logger.info(`Cleaned up ${removedCount} stale lock file(s)`);
+    } else {
+      logger.debug('No stale lock files found');
     }
   }
 
