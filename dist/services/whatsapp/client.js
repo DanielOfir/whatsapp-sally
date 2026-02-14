@@ -57,18 +57,20 @@ class WhatsAppClient {
                     '--disable-setuid-sandbox',
                     '--disable-dev-shm-usage',
                     '--disable-crash-reporter',
-                    '--disable-breakpad',
                     '--no-crash-upload',
-                    '--crash-dumps-dir=/tmp/chrome',
                     '--disable-gpu',
                     '--disable-software-rasterizer',
                     '--disable-extensions',
                     '--disable-background-networking',
                     '--disable-default-apps',
                     '--disable-sync',
+                    '--single-process',
+                    '--disable-features=VizDisplayCompositor,IsolateOrigins,site-per-process',
+                    '--no-first-run',
+                    '--no-default-browser-check',
                 ],
                 headless: true,
-                // Don't set executablePath - let Puppeteer use its bundled Chrome
+                executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
             },
         });
         this.setupEventHandlers();
@@ -123,17 +125,54 @@ class WhatsAppClient {
     }
     cleanStaleLocks() {
         const sessionDir = path.join(env_1.config.whatsapp.sessionPath, 'session');
-        for (const lockFile of ['SingletonLock', 'SingletonSocket', 'SingletonCookie']) {
+        // Ensure session directory exists
+        try {
+            if (!fs.existsSync(env_1.config.whatsapp.sessionPath)) {
+                fs.mkdirSync(env_1.config.whatsapp.sessionPath, { recursive: true });
+                logger_1.logger.info('Created whatsapp session directory');
+            }
+            if (!fs.existsSync(sessionDir)) {
+                fs.mkdirSync(sessionDir, { recursive: true });
+                logger_1.logger.info('Created session subdirectory');
+            }
+        }
+        catch (error) {
+            logger_1.logger.warn('Could not create session directories', { error });
+        }
+        // Clean all common Chromium lock files
+        const lockFiles = [
+            'SingletonLock',
+            'SingletonSocket',
+            'SingletonCookie',
+            'lockfile',
+            '.lock',
+        ];
+        let removedCount = 0;
+        for (const lockFile of lockFiles) {
             const lockPath = path.join(sessionDir, lockFile);
             try {
                 if (fs.existsSync(lockPath)) {
+                    // Try to force remove with different permissions
+                    try {
+                        fs.chmodSync(lockPath, 0o666);
+                    }
+                    catch {
+                        // Ignore chmod errors
+                    }
                     fs.unlinkSync(lockPath);
                     logger_1.logger.info(`Removed stale lock file: ${lockFile}`);
+                    removedCount++;
                 }
             }
-            catch {
-                // Ignore — file may not exist or may already be cleaned
+            catch (error) {
+                logger_1.logger.error(`Failed to remove lock file ${lockFile}`, { error });
             }
+        }
+        if (removedCount > 0) {
+            logger_1.logger.info(`Cleaned up ${removedCount} stale lock file(s)`);
+        }
+        else {
+            logger_1.logger.debug('No stale lock files found');
         }
     }
     async sendMessageToBot(text) {

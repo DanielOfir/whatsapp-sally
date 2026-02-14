@@ -16,11 +16,25 @@ services:
       - WEBHOOK_PORT=3000
     ports:
       - "3002:3000"
+    read_only: true
+    cap_drop:
+      - ALL
+    deploy:
+      resources:
+        limits:
+          memory: 1g
+          cpus: '1.0'
+          pids: 200
     volumes:
       - whatsapp-session:/app/data/whatsapp-session
       - bridge-logs:/app/data/logs
     tmpfs:
       - /home/botuser/tmp:uid=997,gid=997
+      - /home/botuser/.cache:uid=997,gid=997
+      - /home/botuser/.config:uid=997,gid=997
+      - /home/botuser/.pki:uid=997,gid=997
+      - /app/.wwebjs_cache:uid=997,gid=997
+      - /tmp:uid=997,gid=997
     security_opt:
       - no-new-privileges:true
     healthcheck:

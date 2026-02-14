@@ -2,8 +2,14 @@ node_modules
 dist
 data
 .env
+.env.*
 .git
 .github
 *.md
+*.log
 .claude
 home-assistant
+.DS_Store
+.vscode
+.idea
+Makefile

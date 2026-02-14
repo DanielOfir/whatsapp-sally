@@ -3,7 +3,8 @@ import { config } from '../../config/env';
 import { whatsappClient, Reaction } from './client';
 
 const POLL_INTERVAL_MS = 2000;
-const REACTION_EXTRA_WAIT_MS = 2000;
+/** How long to keep polling for text after the most recent reaction */
+const REACTION_GRACE_MS = 4000;
 
 /** Map of emoji reactions to Hebrew descriptions for TTS */
 const REACTION_LABELS: Record<string, string> = {
@@ -19,6 +20,7 @@ const REACTION_LABELS: Record<string, string> = {
 /** Module-level state — mutated by onReaction(), read by sendAndWaitForReply() */
 const state = {
   reactionEmoji: null as string | null,
+  lastReactionAt: 0,
   watchedMsgId: null as string | null,
 };
 
@@ -40,6 +42,7 @@ export function onReaction(reaction: Reaction, reactedMsgId: string): void {
   if (reactedMsgId === state.watchedMsgId && reaction.reaction) {
     logger.info('Bot reacted to our message', { emoji: reaction.reaction });
     state.reactionEmoji = reaction.reaction;
+    state.lastReactionAt = Date.now();
   }
 }
 
@@ -50,6 +53,7 @@ export function onReaction(reaction: Reaction, reactedMsgId: string): void {
 export async function sendAndWaitForReply(command: string): Promise<string> {
   // Reset state
   state.reactionEmoji = null;
+  state.lastReactionAt = 0;
   state.watchedMsgId = null;
 
   // Send the command and track the message ID for reaction matching
@@ -65,45 +69,6 @@ export async function sendAndWaitForReply(command: string): Promise<string> {
   while (Date.now() < deadline) {
     await sleep(POLL_INTERVAL_MS);
 
-    // Check if a reaction was received (via event handler)
-    // Wait a bit longer — bots often send an emoji reaction followed by a text message
-    if (state.reactionEmoji) {
-      const emoji = state.reactionEmoji;
-      logger.info('Reaction detected, waiting for possible text follow-up', { emoji });
-      await sleep(REACTION_EXTRA_WAIT_MS);
-
-      // Poll for text messages that may have arrived after the reaction
-      try {
-        const chat = await whatsappClient.getBotChat();
-        const messages = await chat.fetchMessages({ limit: 5 });
-        const textReplies = messages.filter((msg) => {
-          if (msg.fromMe) return false;
-          return msg.timestamp * 1000 > sentAt;
-        });
-
-        if (textReplies.length > 0) {
-          const combined = textReplies.map((msg) => msg.body?.trim()).filter(Boolean).join('\n');
-          if (combined) {
-            logger.info('Text reply arrived after reaction, using text', {
-              emoji,
-              messageCount: textReplies.length,
-            });
-            state.watchedMsgId = null;
-            return combined;
-          }
-        }
-      } catch (error) {
-        logger.debug('Error polling after reaction', {
-          error: error instanceof Error ? error.message : String(error),
-        });
-      }
-
-      // No text message followed — return the reaction
-      state.watchedMsgId = null;
-      const label = REACTION_LABELS[emoji] || emoji;
-      return `הבוט הגיב: ${emoji} ${label}`;
-    }
-
     // Poll for text messages
     try {
       const chat = await whatsappClient.getBotChat();
@@ -117,15 +82,6 @@ export async function sendAndWaitForReply(command: string): Promise<string> {
       if (botReplies.length > 0) {
         // Buffer briefly to catch multi-message replies
         await sleep(config.reply.bufferMs);
-
-        // Check for reaction one more time (might have arrived during buffer)
-        if (state.reactionEmoji) {
-          const emoji = state.reactionEmoji;
-          state.watchedMsgId = null;
-          const label = REACTION_LABELS[emoji] || emoji;
-          const textPart = botReplies.map((msg) => msg.body?.trim()).filter(Boolean).join('\n');
-          return textPart ? `${textPart}` : `הבוט הגיב: ${emoji} ${label}`;
-        }
 
         const freshChat = await whatsappClient.getBotChat();
         const freshMessages = await freshChat.fetchMessages({ limit: 10 });
@@ -147,6 +103,24 @@ export async function sendAndWaitForReply(command: string): Promise<string> {
         error: error instanceof Error ? error.message : String(error),
       });
     }
+
+    // If a reaction was received but no text yet, keep polling until grace period expires.
+    // Each new reaction resets the grace window, so chains like 📝 → ❌ → text are handled.
+    if (state.reactionEmoji && Date.now() > state.lastReactionAt + REACTION_GRACE_MS) {
+      const emoji = state.reactionEmoji;
+      logger.info('Reaction grace period expired with no text follow-up', { emoji });
+      state.watchedMsgId = null;
+      const label = REACTION_LABELS[emoji] || emoji;
+      return `הבוט הגיב: ${emoji} ${label}`;
+    }
+  }
+
+  // Timeout — check if we at least got a reaction
+  if (state.reactionEmoji) {
+    const emoji = state.reactionEmoji;
+    state.watchedMsgId = null;
+    const label = REACTION_LABELS[emoji] || emoji;
+    return `הבוט הגיב: ${emoji} ${label}`;
   }
 
   state.watchedMsgId = null;

@@ -4,7 +4,7 @@ export interface Config {
     botPhoneNumber: string;
   };
   webhook: {
-    secret?: string;
+    secret: string;
     port: number;
   };
   reply: {

@@ -28,7 +28,7 @@ fi
 
 # Ensure temp directory exists and has correct permissions
 mkdir -p /home/botuser/tmp
-chmod 755 /home/botuser/tmp
+chmod 700 /home/botuser/tmp
 
 echo "Starting WhatsApp Bridge application..."
 exec node dist/index.js

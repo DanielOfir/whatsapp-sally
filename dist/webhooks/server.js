@@ -6,10 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.startWebhookServer = startWebhookServer;
 exports.stopWebhookServer = stopWebhookServer;
 const express_1 = __importDefault(require("express"));
+const helmet_1 = __importDefault(require("helmet"));
+const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
+const crypto_1 = __importDefault(require("crypto"));
 const env_1 = require("../config/env");
 const logger_1 = require("../config/logger");
 const client_1 = require("../services/whatsapp/client");
 const replyWaiter_1 = require("../services/whatsapp/replyWaiter");
+const VALID_ACTIONS = new Set(['add', 'remove', 'bought', 'list', 'clear']);
+const MAX_ITEM_LENGTH = 200;
+// Strip control characters (C0/C1) except normal whitespace (space, tab)
+const CONTROL_CHARS_RE = /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g;
 let server = null;
 /** Strip WhatsApp formatting to produce clean text for voice/TTS responses. */
 function toVoiceText(message) {
@@ -58,10 +65,37 @@ function generateHAResponse(botReply, action, item) {
     // For text replies (like list), return as-is
     return botReply;
 }
+/** Timing-safe comparison of two strings using HMAC to avoid length leaks. */
+function safeCompare(a, b) {
+    const key = crypto_1.default.randomBytes(32);
+    const hmacA = crypto_1.default.createHmac('sha256', key).update(a).digest();
+    const hmacB = crypto_1.default.createHmac('sha256', key).update(b).digest();
+    return crypto_1.default.timingSafeEqual(hmacA, hmacB);
+}
+/** Sanitize an item string: trim, strip control chars, enforce max length. */
+function sanitizeItem(item) {
+    const cleaned = item.replace(CONTROL_CHARS_RE, '').trim();
+    if (cleaned.length === 0)
+        return null;
+    if (cleaned.length > MAX_ITEM_LENGTH)
+        return null;
+    return cleaned;
+}
 function startWebhookServer() {
     const app = (0, express_1.default)();
-    app.use(express_1.default.json());
-    // Health check
+    // Security middleware
+    app.use((0, helmet_1.default)());
+    app.use(express_1.default.json({ limit: '10kb' }));
+    app.disable('x-powered-by');
+    // Rate limit the webhook endpoint
+    const webhookLimiter = (0, express_rate_limit_1.default)({
+        windowMs: 60 * 1000,
+        max: 30,
+        standardHeaders: true,
+        legacyHeaders: false,
+        message: { error: 'Too many requests' },
+    });
+    // Health check (no auth, no rate limit)
     app.get('/health', (_req, res) => {
         res.json({
             status: 'ok',
@@ -70,19 +104,17 @@ function startWebhookServer() {
         });
     });
     // HA webhook endpoint
-    app.post('/webhook/ha-event', async (req, res) => {
-        // Validate bearer token if configured
-        if (env_1.config.webhook.secret) {
-            const authHeader = req.headers.authorization;
-            if (authHeader !== `Bearer ${env_1.config.webhook.secret}`) {
-                logger_1.logger.warn('Webhook request with invalid auth');
-                res.status(401).json({ error: 'Unauthorized' });
-                return;
-            }
+    app.post('/webhook/ha-event', webhookLimiter, async (req, res) => {
+        // Validate bearer token
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !safeCompare(authHeader, `Bearer ${env_1.config.webhook.secret}`)) {
+            logger_1.logger.warn('Webhook request with invalid auth');
+            res.status(401).json({ error: 'Unauthorized' });
+            return;
         }
         const event = req.body;
-        if (!event.action) {
-            res.status(400).json({ error: 'Missing action' });
+        if (!event.action || typeof event.action !== 'string' || !VALID_ACTIONS.has(event.action)) {
+            res.status(400).json({ error: 'Invalid or missing action' });
             return;
         }
         // Actions that require an item
@@ -91,17 +123,30 @@ function startWebhookServer() {
             res.status(400).json({ error: `Missing item for action: ${event.action}` });
             return;
         }
-        const command = buildCommand(event.action, event.item);
+        // Sanitize item if present
+        let sanitizedItem = event.item;
+        if (event.item) {
+            if (typeof event.item !== 'string') {
+                res.status(400).json({ error: 'Item must be a string' });
+                return;
+            }
+            sanitizedItem = sanitizeItem(event.item) ?? undefined;
+            if (!sanitizedItem) {
+                res.status(400).json({ error: 'Invalid item (empty or too long)' });
+                return;
+            }
+        }
+        const command = buildCommand(event.action, sanitizedItem);
         if (!command) {
             res.status(400).json({ error: `Unknown action: ${event.action}` });
             return;
         }
-        logger_1.logger.info('Received HA webhook event', { action: event.action, item: event.item, command });
+        logger_1.logger.info('Received HA webhook event', { action: event.action, command });
         try {
             // Send command and wait for reply (text message or reaction)
             const botReply = await (0, replyWaiter_1.sendAndWaitForReply)(command);
             // Convert to user-friendly HA response
-            const haResponse = generateHAResponse(botReply, event.action, event.item);
+            const haResponse = generateHAResponse(botReply, event.action, sanitizedItem);
             res.json({
                 ok: true,
                 message: haResponse,

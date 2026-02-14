@@ -6,6 +6,8 @@ const logger_1 = require("../../config/logger");
 const env_1 = require("../../config/env");
 const client_1 = require("./client");
 const POLL_INTERVAL_MS = 2000;
+/** How long to keep polling for text after the most recent reaction */
+const REACTION_GRACE_MS = 4000;
 /** Map of emoji reactions to Hebrew descriptions for TTS */
 const REACTION_LABELS = {
     '👍': 'אישור',
@@ -19,6 +21,7 @@ const REACTION_LABELS = {
 /** Module-level state — mutated by onReaction(), read by sendAndWaitForReply() */
 const state = {
     reactionEmoji: null,
+    lastReactionAt: 0,
     watchedMsgId: null,
 };
 /**
@@ -38,6 +41,7 @@ function onReaction(reaction, reactedMsgId) {
     if (reactedMsgId === state.watchedMsgId && reaction.reaction) {
         logger_1.logger.info('Bot reacted to our message', { emoji: reaction.reaction });
         state.reactionEmoji = reaction.reaction;
+        state.lastReactionAt = Date.now();
     }
 }
 /**
@@ -47,6 +51,7 @@ function onReaction(reaction, reactedMsgId) {
 async function sendAndWaitForReply(command) {
     // Reset state
     state.reactionEmoji = null;
+    state.lastReactionAt = 0;
     state.watchedMsgId = null;
     // Send the command and track the message ID for reaction matching
     const sentMsg = await client_1.whatsappClient.sendMessageToBot(command);
@@ -57,13 +62,6 @@ async function sendAndWaitForReply(command) {
     const deadline = Date.now() + env_1.config.reply.timeoutMs;
     while (Date.now() < deadline) {
         await sleep(POLL_INTERVAL_MS);
-        // Check if a reaction was received (via event handler)
-        if (state.reactionEmoji) {
-            const emoji = state.reactionEmoji;
-            state.watchedMsgId = null;
-            const label = REACTION_LABELS[emoji] || emoji;
-            return `הבוט הגיב: ${emoji} ${label}`;
-        }
         // Poll for text messages
         try {
             const chat = await client_1.whatsappClient.getBotChat();
@@ -76,14 +74,6 @@ async function sendAndWaitForReply(command) {
             if (botReplies.length > 0) {
                 // Buffer briefly to catch multi-message replies
                 await sleep(env_1.config.reply.bufferMs);
-                // Check for reaction one more time (might have arrived during buffer)
-                if (state.reactionEmoji) {
-                    const emoji = state.reactionEmoji;
-                    state.watchedMsgId = null;
-                    const label = REACTION_LABELS[emoji] || emoji;
-                    const textPart = botReplies.map((msg) => msg.body?.trim()).filter(Boolean).join('\n');
-                    return textPart ? `${textPart}` : `הבוט הגיב: ${emoji} ${label}`;
-                }
                 const freshChat = await client_1.whatsappClient.getBotChat();
                 const freshMessages = await freshChat.fetchMessages({ limit: 10 });
                 const allReplies = freshMessages.filter((msg) => {
@@ -105,6 +95,22 @@ async function sendAndWaitForReply(command) {
                 error: error instanceof Error ? error.message : String(error),
             });
         }
+        // If a reaction was received but no text yet, keep polling until grace period expires.
+        // Each new reaction resets the grace window, so chains like 📝 → ❌ → text are handled.
+        if (state.reactionEmoji && Date.now() > state.lastReactionAt + REACTION_GRACE_MS) {
+            const emoji = state.reactionEmoji;
+            logger_1.logger.info('Reaction grace period expired with no text follow-up', { emoji });
+            state.watchedMsgId = null;
+            const label = REACTION_LABELS[emoji] || emoji;
+            return `הבוט הגיב: ${emoji} ${label}`;
+        }
+    }
+    // Timeout — check if we at least got a reaction
+    if (state.reactionEmoji) {
+        const emoji = state.reactionEmoji;
+        state.watchedMsgId = null;
+        const label = REACTION_LABELS[emoji] || emoji;
+        return `הבוט הגיב: ${emoji} ${label}`;
     }
     state.watchedMsgId = null;
     logger_1.logger.warn('Reply timeout — bot did not respond', {

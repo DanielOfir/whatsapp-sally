@@ -16,18 +16,26 @@ function requireEnv(key) {
 function optionalEnv(key, defaultValue = '') {
     return process.env[key] || defaultValue;
 }
+function parseIntEnv(key, defaultValue) {
+    const raw = process.env[key] || defaultValue;
+    const parsed = parseInt(raw, 10);
+    if (isNaN(parsed)) {
+        throw new Error(`Invalid integer for environment variable ${key}: "${raw}"`);
+    }
+    return parsed;
+}
 exports.config = {
     whatsapp: {
         botPhoneNumber: requireEnv('BOT_PHONE_NUMBER'),
         sessionPath: optionalEnv('WHATSAPP_SESSION_PATH', './data/whatsapp-session'),
     },
     webhook: {
-        secret: optionalEnv('WEBHOOK_SECRET') || undefined,
-        port: parseInt(optionalEnv('WEBHOOK_PORT', '3000'), 10),
+        secret: requireEnv('WEBHOOK_SECRET'),
+        port: parseIntEnv('WEBHOOK_PORT', '3000'),
     },
     reply: {
-        timeoutMs: parseInt(optionalEnv('REPLY_TIMEOUT_MS', '30000'), 10),
-        bufferMs: parseInt(optionalEnv('REPLY_BUFFER_MS', '1500'), 10),
+        timeoutMs: parseIntEnv('REPLY_TIMEOUT_MS', '30000'),
+        bufferMs: parseIntEnv('REPLY_BUFFER_MS', '1500'),
     },
     commands: {
         add: optionalEnv('CMD_TEMPLATE_ADD', 'הוסף {item}'),
