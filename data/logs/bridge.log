@@ -1,0 +1,224 @@
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T10:52:10.383Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T10:52:10.386Z"}
+{"level":"error","message":"Port 3000 is already in use. Kill the other process or change WEBHOOK_PORT.","timestamp":"2026-02-14T10:52:10.387Z"}
+{"level":"info","message":"WhatsApp QR Code generated. Scan with your phone:","timestamp":"2026-02-14T10:52:16.856Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T10:52:16.873Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T10:52:23.561Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T10:56:26.628Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T10:56:26.631Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T10:56:26.632Z"}
+{"level":"error","message":"Port 3000 is already in use. Kill the other process or change WEBHOOK_PORT.","timestamp":"2026-02-14T10:56:26.633Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T10:56:30.789Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T10:57:18.599Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T10:57:18.601Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T10:57:18.602Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T10:57:18.602Z"}
+{"level":"info","message":"WhatsApp QR Code generated. Scan with your phone:","timestamp":"2026-02-14T10:57:22.711Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T10:57:22.729Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T10:57:59.479Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T10:58:12.354Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T10:58:12.357Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T10:58:12.357Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T10:58:12.358Z"}
+{"level":"info","message":"WhatsApp QR Code generated. Scan with your phone:","timestamp":"2026-02-14T10:58:16.471Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T10:58:16.489Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T10:58:26.135Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T10:58:26.136Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T10:58:26.136Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T10:58:26.665Z"}
+{"action":"list","command":"רשימה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T10:59:08.382Z"}
+{"length":192,"level":"info","message":"Bot reply complete","messageCount":1,"timestamp":"2026-02-14T10:59:15.196Z"}
+{"action":"add","command":"הוסף חלב","item":"חלב","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:07:34.920Z"}
+{"level":"warn","message":"Reply timeout — bot did not respond","timeoutMs":30000,"timestamp":"2026-02-14T11:08:04.941Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T11:08:42.966Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T11:09:20.699Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T11:09:20.702Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T11:09:20.702Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T11:09:20.703Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T11:09:23.592Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T11:09:25.126Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T11:09:25.167Z"}
+{"action":"add","command":"הוסף חלב","item":"חלב","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:09:57.131Z"}
+{"length":21,"level":"info","message":"Bot reply complete","messageCount":1,"timestamp":"2026-02-14T11:10:11.482Z"}
+{"action":"add","command":"הוסף שוקו","item":"שוקו","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:13:19.773Z"}
+{"level":"warn","message":"Reply timeout — bot did not respond","timeoutMs":30000,"timestamp":"2026-02-14T11:13:49.790Z"}
+{"action":"add","command":"הוסף חלב","item":"חלב","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:13:50.258Z"}
+{"length":21,"level":"info","message":"Bot reply complete","messageCount":1,"timestamp":"2026-02-14T11:14:01.051Z"}
+{"action":"add","command":"הוסף שוקו","item":"שוקו","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:14:08.843Z"}
+{"length":21,"level":"info","message":"Bot reply complete","messageCount":1,"timestamp":"2026-02-14T11:14:23.193Z"}
+{"action":"add","command":"הוסף עגבניות","item":"עגבניות","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:14:32.960Z"}
+{"level":"warn","message":"Reply timeout — bot did not respond","timeoutMs":30000,"timestamp":"2026-02-14T11:15:03.088Z"}
+{"action":"add","command":"הוסף בדיקה","item":"בדיקה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:15:20.025Z"}
+{"length":21,"level":"info","message":"Bot reply complete","messageCount":1,"timestamp":"2026-02-14T11:15:39.955Z"}
+{"action":"list","command":"רשימה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:16:09.241Z"}
+{"length":242,"level":"info","message":"Bot reply complete","messageCount":1,"timestamp":"2026-02-14T11:16:14.813Z"}
+{"action":"remove","command":"הסר בדיקה","item":"בדיקה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:16:59.171Z"}
+{"level":"warn","message":"Reply timeout — bot did not respond","timeoutMs":30000,"timestamp":"2026-02-14T11:17:29.306Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T11:19:06.598Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T11:19:13.068Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T11:19:13.071Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T11:19:13.071Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T11:19:13.072Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T11:19:15.823Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T11:19:17.393Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T11:19:17.433Z"}
+{"action":"remove","command":"הסר חלב","item":"חלב","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:19:39.458Z"}
+{"level":"warn","message":"Reply timeout — bot did not respond","timeoutMs":30000,"timestamp":"2026-02-14T11:20:09.459Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T11:21:48.928Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T11:22:03.621Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T11:22:03.624Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T11:22:03.624Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T11:22:03.625Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T11:22:06.539Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T11:22:08.117Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T11:22:08.158Z"}
+{"action":"remove","command":"הסר חלב","item":"חלב","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:22:17.693Z"}
+{"length":35,"level":"info","message":"Bot reply complete","messageCount":1,"timestamp":"2026-02-14T11:22:35.087Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T11:22:46.125Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T11:37:37.856Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T11:37:37.859Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T11:37:37.859Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T11:37:37.860Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T11:37:45.849Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T11:37:47.438Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T11:37:47.471Z"}
+{"action":"add","command":"הוסף קוקורוזה לרשימת קניות","item":"קוקורוזה לרשימת קניות","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:38:23.759Z"}
+{"level":"warn","message":"Reply timeout — bot did not respond","timeoutMs":30000,"timestamp":"2026-02-14T11:38:53.764Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T11:41:52.710Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T11:42:08.476Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T11:42:08.478Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T11:42:08.479Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T11:42:08.480Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T11:42:11.795Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T11:42:13.140Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T11:42:13.184Z"}
+{"action":"add","command":"הוסף קוקורוזה","item":"קוקורוזה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:43:17.640Z"}
+{"expectedBot":"972559733562@c.us","from":"972547245057@c.us","fromMe":true,"hasBody":true,"id":"true_972559733562@c.us_3EB00BAF7ECDE645FC5D3A","level":"debug","message":"Message received while waiting for reply","timestamp":"2026-02-14T11:43:17.660Z"}
+{"level":"debug","message":"Message sent to bot","text":"הוסף קוקורוזה","timestamp":"2026-02-14T11:43:17.668Z"}
+{"level":"warn","message":"Reply timeout — bot did not respond","timeoutMs":30000,"timestamp":"2026-02-14T11:43:47.642Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T11:53:29.058Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T11:53:33.131Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T11:53:33.133Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T11:53:33.134Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T11:53:33.135Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T11:53:35.932Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T11:53:37.371Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T11:53:37.408Z"}
+{"action":"add","command":"הוסף קוקורוזה","item":"קוקורוזה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:53:45.951Z"}
+{"level":"debug","message":"Message sent to bot","text":"הוסף קוקורוזה","timestamp":"2026-02-14T11:53:45.979Z"}
+{"length":21,"level":"info","message":"Bot reply received via polling","messageCount":1,"timestamp":"2026-02-14T11:53:59.624Z"}
+{"action":"remove","command":"הסר קוקורוזה","item":"קוקורוזה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T11:54:12.013Z"}
+{"level":"debug","message":"Message sent to bot","text":"הסר קוקורוזה","timestamp":"2026-02-14T11:54:12.145Z"}
+{"level":"warn","message":"Reply timeout — bot did not respond","timeoutMs":30000,"timestamp":"2026-02-14T11:54:42.278Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T11:57:56.333Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T11:58:56.122Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T11:58:56.124Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T11:58:56.124Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T11:58:56.125Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T11:58:58.703Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T11:59:00.030Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T11:59:00.075Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T11:59:24.706Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T11:59:24.708Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T11:59:24.709Z"}
+{"level":"error","message":"Port 3000 is already in use. Kill the other process or change WEBHOOK_PORT.","timestamp":"2026-02-14T11:59:24.710Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T11:59:31.939Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T11:59:31.941Z"}
+{"level":"error","message":"Port 3000 is already in use. Kill the other process or change WEBHOOK_PORT.","timestamp":"2026-02-14T11:59:31.942Z"}
+{"error":{},"level":"error","message":"Fatal error during startup","timestamp":"2026-02-14T11:59:45.200Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T11:59:47.316Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T11:59:48.656Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T11:59:48.697Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T12:00:05.226Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T12:00:05.228Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T12:00:05.228Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T12:00:05.229Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T12:00:27.955Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T12:00:29.320Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T12:00:29.358Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T12:02:22.327Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T12:02:22.330Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T12:02:22.331Z"}
+{"level":"error","message":"Port 3000 is already in use. Kill the other process or change WEBHOOK_PORT.","timestamp":"2026-02-14T12:02:22.331Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T12:02:27.159Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T12:02:27.162Z"}
+{"level":"error","message":"Port 3000 is already in use. Kill the other process or change WEBHOOK_PORT.","timestamp":"2026-02-14T12:02:27.162Z"}
+{"error":{},"level":"error","message":"Fatal error during startup","timestamp":"2026-02-14T12:02:43.345Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T12:02:44.899Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T12:02:46.255Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T12:02:46.315Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T12:02:53.220Z"}
+{"level":"info","message":"Destroying WhatsApp client...","timestamp":"2026-02-14T12:02:53.220Z"}
+{"level":"info","message":"Webhook server stopped","timestamp":"2026-02-14T12:02:53.231Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T12:09:52.281Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T12:09:52.284Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T12:09:52.284Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T12:09:52.285Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T12:09:54.984Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T12:09:56.364Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T12:09:56.411Z"}
+{"action":"add","command":"הוסף בדיקה","item":"בדיקה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T12:10:06.350Z"}
+{"level":"debug","message":"Message sent to bot","msgId":"true_972559733562@c.us_3EB09C0A592A303257DACB","text":"הוסף בדיקה","timestamp":"2026-02-14T12:10:06.373Z"}
+{"level":"debug","message":"Watching for reply/reaction","sentMsgId":"true_972559733562@c.us_3EB09C0A592A303257DACB","timestamp":"2026-02-14T12:10:06.373Z"}
+{"level":"debug","message":"Reaction event received","msgId":"true_972559733562@c.us_3EB09C0A592A303257DACB","reaction":"🧻","senderId":"972559733562@c.us","timestamp":"2026-02-14T12:10:10.510Z"}
+{"emoji":"🧻","level":"debug","message":"Checking reaction","reactedMsgId":"true_972559733562@c.us_3EB09C0A592A303257DACB","senderId":"972559733562@c.us","timestamp":"2026-02-14T12:10:10.510Z","watchedMsgId":"true_972559733562@c.us_3EB09C0A592A303257DACB"}
+{"emoji":"🧻","level":"info","message":"Bot reacted to our message","timestamp":"2026-02-14T12:10:10.510Z"}
+{"level":"debug","message":"Reaction event received","msgId":"true_972559733562@c.us_3EB09C0A592A303257DACB","reaction":"👍","senderId":"972559733562@c.us","timestamp":"2026-02-14T12:10:15.260Z"}
+{"emoji":"👍","level":"debug","message":"Checking reaction","reactedMsgId":"true_972559733562@c.us_3EB09C0A592A303257DACB","senderId":"972559733562@c.us","timestamp":"2026-02-14T12:10:15.261Z","watchedMsgId":null}
+{"action":"list","command":"רשימה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T12:10:29.329Z"}
+{"level":"debug","message":"Message sent to bot","msgId":"true_972559733562@c.us_3EB091E9298D5CBA2C4108","text":"רשימה","timestamp":"2026-02-14T12:10:29.339Z"}
+{"level":"debug","message":"Watching for reply/reaction","sentMsgId":"true_972559733562@c.us_3EB091E9298D5CBA2C4108","timestamp":"2026-02-14T12:10:29.339Z"}
+{"length":260,"level":"info","message":"Bot reply received via polling","messageCount":1,"timestamp":"2026-02-14T12:10:38.935Z"}
+{"action":"remove","command":"הסר בדיקה","item":"בדיקה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T12:11:29.695Z"}
+{"level":"debug","message":"Message sent to bot","msgId":"true_972559733562@c.us_3EB04EC2FD61C991ABCCF6","text":"הסר בדיקה","timestamp":"2026-02-14T12:11:29.707Z"}
+{"level":"debug","message":"Watching for reply/reaction","sentMsgId":"true_972559733562@c.us_3EB04EC2FD61C991ABCCF6","timestamp":"2026-02-14T12:11:29.707Z"}
+{"level":"debug","message":"Reaction event received","msgId":"true_972559733562@c.us_3EB04EC2FD61C991ABCCF6","reaction":"🗑","senderId":"972559733562@c.us","timestamp":"2026-02-14T12:11:35.385Z"}
+{"emoji":"🗑","level":"debug","message":"Checking reaction","reactedMsgId":"true_972559733562@c.us_3EB04EC2FD61C991ABCCF6","senderId":"972559733562@c.us","timestamp":"2026-02-14T12:11:35.385Z","watchedMsgId":"true_972559733562@c.us_3EB04EC2FD61C991ABCCF6"}
+{"emoji":"🗑","level":"info","message":"Bot reacted to our message","timestamp":"2026-02-14T12:11:35.385Z"}
+{"level":"debug","message":"Reaction event received","msgId":"true_972559733562@c.us_3EB04EC2FD61C991ABCCF6","reaction":"👍","senderId":"972559733562@c.us","timestamp":"2026-02-14T12:11:41.541Z"}
+{"emoji":"👍","level":"debug","message":"Checking reaction","reactedMsgId":"true_972559733562@c.us_3EB04EC2FD61C991ABCCF6","senderId":"972559733562@c.us","timestamp":"2026-02-14T12:11:41.541Z","watchedMsgId":null}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T12:12:10.703Z"}
+{"level":"info","message":"Destroying WhatsApp client...","timestamp":"2026-02-14T12:12:10.704Z"}
+{"level":"info","message":"Webhook server stopped","timestamp":"2026-02-14T12:12:10.712Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T14:32:50.164Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T14:32:50.167Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T14:32:50.168Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T14:32:50.169Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T14:32:54.845Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T14:32:56.376Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T14:32:56.430Z"}
+{"action":"add","command":"הוסף בדיקה","item":"בדיקה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T14:34:11.918Z"}
+{"emoji":"🧻","level":"info","message":"Bot reacted to our message","timestamp":"2026-02-14T14:34:21.834Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T14:36:38.149Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T14:36:38.152Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T14:36:38.152Z"}
+{"level":"error","message":"Port 3000 is already in use. Kill the other process or change WEBHOOK_PORT.","timestamp":"2026-02-14T14:36:38.153Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T14:36:43.802Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T14:36:43.805Z"}
+{"level":"error","message":"Port 3000 is already in use. Kill the other process or change WEBHOOK_PORT.","timestamp":"2026-02-14T14:36:43.806Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T14:36:47.953Z"}
+{"error":{},"level":"error","message":"Fatal error during startup","timestamp":"2026-02-14T14:36:48.936Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T14:36:50.943Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T14:36:52.510Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T14:36:53.212Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T14:38:12.723Z"}
+{"level":"info","message":"Destroying WhatsApp client...","timestamp":"2026-02-14T14:38:12.724Z"}
+{"level":"info","message":"Webhook server stopped","timestamp":"2026-02-14T14:38:12.737Z"}
+{"level":"info","message":"Starting WhatsApp Bridge...","timestamp":"2026-02-14T14:38:17.072Z"}
+{"level":"info","message":"Initializing WhatsApp client...","timestamp":"2026-02-14T14:38:17.074Z"}
+{"level":"info","message":"Removed stale lock file: SingletonSocket","timestamp":"2026-02-14T14:38:17.075Z"}
+{"level":"info","message":"Webhook server listening on port 3000","timestamp":"2026-02-14T14:38:17.076Z"}
+{"level":"info","message":"WhatsApp Bridge is running","timestamp":"2026-02-14T14:38:19.789Z"}
+{"level":"info","message":"WhatsApp authenticated successfully","timestamp":"2026-02-14T14:38:21.278Z"}
+{"level":"info","message":"WhatsApp client is ready","timestamp":"2026-02-14T14:38:21.950Z"}
+{"action":"add","command":"הוסף בדיקה","item":"בדיקה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T14:38:35.791Z"}
+{"emoji":"📝","level":"info","message":"Bot reacted to our message","timestamp":"2026-02-14T14:38:39.433Z"}
+{"action":"remove","command":"הסר בדיקה","item":"בדיקה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T14:39:14.904Z"}
+{"emoji":"🗑","level":"info","message":"Bot reacted to our message","timestamp":"2026-02-14T14:39:20.574Z"}
+{"action":"list","command":"רשימה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T14:39:28.595Z"}
+{"length":246,"level":"info","message":"Bot reply received via polling","messageCount":1,"timestamp":"2026-02-14T14:39:38.167Z"}
+{"action":"list","command":"רשימה","level":"info","message":"Received HA webhook event","timestamp":"2026-02-14T14:39:52.088Z"}
+{"length":246,"level":"info","message":"Bot reply received via polling","messageCount":1,"timestamp":"2026-02-14T14:40:01.793Z"}
+{"level":"info","message":"Shutting down...","timestamp":"2026-02-14T14:40:06.158Z"}
+{"level":"info","message":"Destroying WhatsApp client...","timestamp":"2026-02-14T14:40:06.158Z"}
+{"level":"info","message":"Webhook server stopped","timestamp":"2026-02-14T14:40:06.169Z"}

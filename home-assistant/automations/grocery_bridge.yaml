@@ -1,0 +1,107 @@
+# Grocery Bridge — Home Assistant configuration
+#
+# Prerequisites:
+#   1. Copy custom_sentences/he/grocery.yaml to your HA config:
+#      /config/custom_sentences/he/grocery.yaml
+#
+#   2. Add the following shell_commands to your configuration.yaml and restart HA:
+#
+#      shell_command:
+#        grocery_bridge_add: 'curl -s -X POST -H "Authorization: Bearer YOUR_WEBHOOK_SECRET" -H "Content-Type: application/json" -d "{\"action\":\"add\",\"item\":\"{{ item }}\"}" http://<BRIDGE_IP>:3000/webhook/ha-event'
+#        grocery_bridge_remove: 'curl -s -X POST -H "Authorization: Bearer YOUR_WEBHOOK_SECRET" -H "Content-Type: application/json" -d "{\"action\":\"remove\",\"item\":\"{{ item }}\"}" http://<BRIDGE_IP>:3000/webhook/ha-event'
+#        grocery_bridge_bought: 'curl -s -X POST -H "Authorization: Bearer YOUR_WEBHOOK_SECRET" -H "Content-Type: application/json" -d "{\"action\":\"bought\",\"item\":\"{{ item }}\"}" http://<BRIDGE_IP>:3000/webhook/ha-event'
+#        grocery_bridge_list: 'curl -s -X POST -H "Authorization: Bearer YOUR_WEBHOOK_SECRET" -H "Content-Type: application/json" -d "{\"action\":\"list\"}" http://<BRIDGE_IP>:3000/webhook/ha-event'
+#        grocery_bridge_clear: 'curl -s -X POST -H "Authorization: Bearer YOUR_WEBHOOK_SECRET" -H "Content-Type: application/json" -d "{\"action\":\"clear\"}" http://<BRIDGE_IP>:3000/webhook/ha-event'
+#
+#   3. Copy the automations below into automations.yaml, or add via the HA UI.
+#   4. Restart Home Assistant.
+#
+# IMPORTANT: The shell_command timeout in HA defaults to 60s. The bridge waits
+# up to REPLY_TIMEOUT_MS (default 30s) for the bot to reply, so the curl call
+# may take up to ~32s. This is within the HA default timeout.
+
+- alias: "Grocery Bridge: Add Item via Voice"
+  id: grocery_bridge_add_voice
+  trigger:
+    - platform: conversation
+      command:
+        - "תוסיף {item} לרשימת הקניות"
+        - "תוסיפי {item} לרשימת הקניות"
+        - "תוסיף {item}"
+        - "תוסיפי {item}"
+        - "הוסף {item} לרשימת הקניות"
+        - "הוסיפי {item} לרשימת הקניות"
+        - "תוסיף {item} לרשימה"
+        - "הוסף {item} לרשימה"
+        - "אני צריך {item}"
+        - "אנחנו צריכים {item}"
+        - "צריך {item}"
+  action:
+    - action: shell_command.grocery_bridge_add
+      data:
+        item: "{{ trigger.slots.item }}"
+      response_variable: result
+    - set_conversation_response: "{{ (result.stdout | from_json).voice_message | default('לא הצלחתי להוסיף את הפריט') }}"
+
+- alias: "Grocery Bridge: Remove Item via Voice"
+  id: grocery_bridge_remove_voice
+  trigger:
+    - platform: conversation
+      command:
+        - "תסיר {item} מרשימת הקניות"
+        - "הסר {item} מרשימת הקניות"
+        - "תמחק {item} מרשימת הקניות"
+        - "מחק {item} מהרשימה"
+        - "תסיר {item} מהרשימה"
+        - "הסר {item} מהרשימה"
+  action:
+    - action: shell_command.grocery_bridge_remove
+      data:
+        item: "{{ trigger.slots.item }}"
+      response_variable: result
+    - set_conversation_response: "{{ (result.stdout | from_json).voice_message | default('לא הצלחתי להסיר את הפריט') }}"
+
+- alias: "Grocery Bridge: Mark Bought via Voice"
+  id: grocery_bridge_bought_voice
+  trigger:
+    - platform: conversation
+      command:
+        - "קניתי {item}"
+        - "קנינו {item}"
+        - "סמן {item} כנקנה"
+        - "קנית {item}"
+  action:
+    - action: shell_command.grocery_bridge_bought
+      data:
+        item: "{{ trigger.slots.item }}"
+      response_variable: result
+    - set_conversation_response: "{{ (result.stdout | from_json).voice_message | default('לא הצלחתי לסמן את הפריט') }}"
+
+- alias: "Grocery Bridge: Show List via Voice"
+  id: grocery_bridge_list_voice
+  trigger:
+    - platform: conversation
+      command:
+        - "מה ברשימת הקניות"
+        - "הצג רשימת קניות"
+        - "מה צריך לקנות"
+        - "רשימת קניות"
+        - "רשימה"
+        - "הצג רשימה"
+  action:
+    - action: shell_command.grocery_bridge_list
+      response_variable: result
+    - set_conversation_response: "{{ (result.stdout | from_json).voice_message | default('לא הצלחתי לקבל את הרשימה') }}"
+
+- alias: "Grocery Bridge: Clear Completed via Voice"
+  id: grocery_bridge_clear_voice
+  trigger:
+    - platform: conversation
+      command:
+        - "נקה רשימת קניות"
+        - "נקה פריטים שנקנו"
+        - "נקה את הרשימה"
+  action:
+    - action: shell_command.grocery_bridge_clear
+      response_variable: result
+    - set_conversation_response: "{{ (result.stdout | from_json).voice_message | default('לא הצלחתי לנקות את הרשימה') }}"

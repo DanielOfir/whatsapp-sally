@@ -1,0 +1,53 @@
+language: "he"
+intents:
+  AddGroceryItem:
+    data:
+      - sentences:
+          - "תוסיף {item} לרשימת הקניות"
+          - "תוסיפי {item} לרשימת הקניות"
+          - "הוסף {item} לרשימת הקניות"
+          - "הוסיפי {item} לרשימת הקניות"
+          - "תוסיף {item} לרשימה"
+          - "הוסף {item} לרשימה"
+          - "אני צריך {item}"
+          - "אנחנו צריכים {item}"
+          - "צריך {item}"
+
+  RemoveGroceryItem:
+    data:
+      - sentences:
+          - "תסיר {item} מרשימת הקניות"
+          - "הסר {item} מרשימת הקניות"
+          - "תמחק {item} מרשימת הקניות"
+          - "מחק {item} מהרשימה"
+          - "תסיר {item} מהרשימה"
+          - "הסר {item} מהרשימה"
+
+  MarkGroceryBought:
+    data:
+      - sentences:
+          - "קניתי {item}"
+          - "קנינו {item}"
+          - "סמן {item} כנקנה"
+          - "קנית {item}"
+
+  ShowGroceryList:
+    data:
+      - sentences:
+          - "מה ברשימת הקניות"
+          - "הצג רשימת קניות"
+          - "מה צריך לקנות"
+          - "רשימת קניות"
+          - "רשימה"
+          - "הצג רשימה"
+
+  ClearGroceryList:
+    data:
+      - sentences:
+          - "נקה רשימת קניות"
+          - "נקה פריטים שנקנו"
+          - "נקה את הרשימה"
+
+lists:
+  item:
+    wildcard: true

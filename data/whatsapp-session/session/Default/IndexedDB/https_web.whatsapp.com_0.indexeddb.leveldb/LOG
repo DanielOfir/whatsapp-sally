@@ -1,0 +1,73 @@
+2026/02/14-16:38:17.976 11bbf5d Reusing MANIFEST /Users/daniel/Documents/projects/claude-play/whatsapp-bridge/data/whatsapp-session/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/02/14-16:38:17.977 11bbf5d Recovering log #2178
+2026/02/14-16:38:17.981 11bbf5d Reusing old log /Users/daniel/Documents/projects/claude-play/whatsapp-bridge/data/whatsapp-session/session/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/002178.log 
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2158
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2173
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2172
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2176
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2175
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2174
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2145
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2144
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2152
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2153
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2157
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2156
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2140
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2154
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2155
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2141
+2026/02/14-16:38:17.982 11bbf5d Delete type=2 #2182
+2026/02/14-16:38:19.790 11bbf5d Compacting 1@1 + 10@2 files
+2026/02/14-16:38:19.814 11bbf5d Generated table #2200@1: 6193 keys, 2125438 bytes
+2026/02/14-16:38:19.830 11bbf5d Generated table #2201@1: 6181 keys, 2124337 bytes
+2026/02/14-16:38:19.847 11bbf5d Generated table #2202@1: 6385 keys, 2128311 bytes
+2026/02/14-16:38:19.874 11bbf5d Generated table #2203@1: 54015 keys, 2187480 bytes
+2026/02/14-16:38:19.913 11bbf5d Generated table #2204@1: 101567 keys, 2252756 bytes
+2026/02/14-16:38:19.950 11bbf5d Generated table #2205@1: 98603 keys, 2247187 bytes
+2026/02/14-16:38:19.987 11bbf5d Generated table #2206@1: 97890 keys, 2248274 bytes
+2026/02/14-16:38:20.024 11bbf5d Generated table #2207@1: 97849 keys, 2247704 bytes
+2026/02/14-16:38:20.062 11bbf5d Generated table #2208@1: 97799 keys, 2245821 bytes
+2026/02/14-16:38:20.088 11bbf5d Generated table #2209@1: 70889 keys, 1621436 bytes
+2026/02/14-16:38:20.088 11bbf5d Compacted 1@1 + 10@2 files => 21428744 bytes
+2026/02/14-16:38:20.090 11bbf5d compacted to: files[ 0 0 37 0 0 0 0 ]
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2164
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2170
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2171
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2165
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2167
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2166
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2162
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2163
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2180
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2168
+2026/02/14-16:38:20.091 11bbf5d Delete type=2 #2169
+2026/02/14-16:39:52.232 11bbf5f Level-0 table #2211: started
+2026/02/14-16:39:52.246 11bbf5f Level-0 table #2211: 1223809 bytes OK
+2026/02/14-16:39:52.248 11bbf5f Delete type=0 #2178
+2026/02/14-16:39:52.633 11bbf5f Compacting 1@0 + 0@1 files
+2026/02/14-16:39:52.641 11bbf5f Generated table #2212@0: 15300 keys, 134550 bytes
+2026/02/14-16:39:52.648 11bbf5f Generated table #2213@0: 11207 keys, 366795 bytes
+2026/02/14-16:39:52.650 11bbf5f Generated table #2214@0: 152 keys, 21257 bytes
+2026/02/14-16:39:52.650 11bbf5f Compacted 1@0 + 0@1 files => 522602 bytes
+2026/02/14-16:39:52.652 11bbf5f compacted to: files[ 0 3 37 0 0 0 0 ]
+2026/02/14-16:39:52.653 11bbf5f Delete type=2 #2211
+2026/02/14-16:39:58.837 11bbf5f Compacting 1@1 + 7@2 files
+2026/02/14-16:39:58.878 11bbf5f Generated table #2215@1: 97358 keys, 2247858 bytes
+2026/02/14-16:39:58.916 11bbf5f Generated table #2216@1: 97816 keys, 2247393 bytes
+2026/02/14-16:39:58.953 11bbf5f Generated table #2217@1: 90556 keys, 2240320 bytes
+2026/02/14-16:39:58.986 11bbf5f Generated table #2218@1: 75221 keys, 2260058 bytes
+2026/02/14-16:39:59.015 11bbf5f Generated table #2219@1: 33996 keys, 2192517 bytes
+2026/02/14-16:39:59.058 11bbf5f Generated table #2220@1: 69922 keys, 2237901 bytes
+2026/02/14-16:39:59.090 11bbf5f Generated table #2221@1: 39233 keys, 2204295 bytes
+2026/02/14-16:39:59.091 11bbf5f Generated table #2222@1: 121 keys, 99761 bytes
+2026/02/14-16:39:59.091 11bbf5f Compacted 1@1 + 7@2 files => 15730103 bytes
+2026/02/14-16:39:59.093 11bbf5f compacted to: files[ 0 2 38 0 0 0 0 ]
+2026/02/14-16:39:59.093 11bbf5f Delete type=2 #2213
+2026/02/14-16:39:59.093 11bbf5f Delete type=2 #2189
+2026/02/14-16:39:59.093 11bbf5f Delete type=2 #2188
+2026/02/14-16:39:59.093 11bbf5f Delete type=2 #2186
+2026/02/14-16:39:59.093 11bbf5f Delete type=2 #2187
+2026/02/14-16:39:59.093 11bbf5f Delete type=2 #2185
+2026/02/14-16:39:59.093 11bbf5f Delete type=2 #2184
+2026/02/14-16:39:59.093 11bbf5f Delete type=2 #2183
